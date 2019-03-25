@@ -1,8 +1,10 @@
 
-esquid:S00101
-"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·š†‡
-jsquid:S1223"LRename this method to prevent any misunderstanding or make it a constructor.(Çµí‘8å—Î¦›-
-xsquid:UselessImportCheck"MRemove this unused import 'com.github.theholywaffle.teamspeak3.api.Property'.(˜–•ˆ8ñí¼§›-
-nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(î¬Çñýÿÿÿÿ8÷éÌ§›-
-Šsquid:UselessImportCheck"_Remove this unused import 'com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager'.(Â…ÓÁ8èåÃ§›-
+[
+squid:S106W"9Replace this use of System.out or System.err by a logger.(Å­ËÝúÿÿÿÿ8¶Êû¬›-
+esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·š†‡
 Ssquid:S1191"5Use classes from the Java API instead of Sun classes.(Â…ÓÁ8èåÃ§›-
+hsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¶æØn8Å×œµ›-
+Nsquid:S4524!"+Move this default to the end of the switch.(Ý–Ò˜ÿÿÿÿÿ8¶Êû¬›-
+jsquid:S1223"LRename this method to prevent any misunderstanding or make it a constructor.(Çµí‘8å—Î¦›-
+Šsquid:UselessImportCheck"_Remove this unused import 'com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager'.(Â…ÓÁ8èåÃ§›-
+xsquid:UselessImportCheck"MRemove this unused import 'com.github.theholywaffle.teamspeak3.api.Property'.(˜–•ˆ8ñí¼§›-

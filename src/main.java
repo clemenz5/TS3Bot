@@ -2,6 +2,7 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.Property;
+import com.github.theholywaffle.teamspeak3.api.wrapper.Ban;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager;
 
@@ -23,7 +24,7 @@ public class main {
         api = query.getApi();
         api.login("kronBot", "jeWpsvuX");
         api.selectVirtualServerById(1);
-        api.setNickname("TS3Client");
+        //api.setNickname("Luis");
         Scanner scanner = new Scanner(System.in);
         String command;
         do {
@@ -60,6 +61,15 @@ public class main {
                 case "textAll":
                     textAll(scanner);
                     break;
+                case "kick":
+                    kick(scanner);
+                    break;
+                case "unban":
+                    unban(scanner);
+                    break;
+                case "unbanAll":
+                    unbanAll();
+                    break;
             }
             print("-");
 
@@ -69,9 +79,9 @@ public class main {
 
     private static void printCurrentClients() {
         List<Client> clientList = api.getClients();
-        print("Client List in format of [nickname] [id]");
+        print("Client List in format of [id] [nickname]");
         for (Client client : clientList) {
-            print(client.getNickname() + " " + client.getId());
+            print(client.getId() + " " + client.getNickname());
         }
     }
 
@@ -88,15 +98,18 @@ public class main {
         printCurrentClients();
         print("give the id of the user you want to poke (or 0 to cancel)");
         int clientID = scanner.nextInt();
+        if(clientID == 0){
+            return;
+        }
         print("give now the poke message");
-        String message = scanner.next();
+        String message = scanner.nextLine();
         api.pokeClient(clientID, message);
     }
 
     private static void pokeAll(Scanner scanner){
         List<Integer> clientIDList = getIDList();
         print("give the poke message");
-        String message = scanner.next();
+        String message = scanner.nextLine();
         for(Integer id : clientIDList){
             api.pokeClient(id, message);
         }
@@ -106,6 +119,9 @@ public class main {
         printCurrentClients();
         print("give the id of the user you want to text (or 0 to cancel)");
         int clientID = scanner.nextInt();
+        if(clientID == 0){
+            return;
+        }
         print("give now the message");
         String message = scanner.next();
         api.sendPrivateMessage(clientID, message);
@@ -130,4 +146,43 @@ public class main {
         clientIDList.remove(myID);
         return clientIDList;
     }
+
+    private static void kick(Scanner scanner){
+        printCurrentClients();
+        print("which client is to kick (0 to cancel)");
+        int clientID = scanner.nextInt();
+        if(clientID == 0){
+            return;
+        }
+        api.kickClientFromServer(clientID);
+    }
+
+    private static void unban(Scanner scanner){
+        printBans();
+        print("which client is to unban (0 to cancel)");
+        int clientID = scanner.nextInt();
+        if(clientID == 0){
+            return;
+        }
+        api.deleteBan(clientID);
+    }
+
+    private static void unbanAll(){
+        if(api.getBans().size() == 0){
+            print("no bans exist");
+        }else{
+            printBans();
+            print("were unbanned");
+            api.deleteAllBans();
+
+        }
+    }
+
+    private static void printBans(){
+        List<Ban> banList = api.getBans();
+        for(Ban ban: banList){
+            print(ban.getId() + " " + ban.getLastNickname());
+        }
+    }
+
 }
